@@ -1,7 +1,8 @@
+import "../styles/header.css";
 function Header() {
   return (
-    <header>
-      <h1>CV Maker</h1>
+    <header className="headerStyle">
+      <h1 className="headerH1">CV Maker</h1>
     </header>
   );
 }
