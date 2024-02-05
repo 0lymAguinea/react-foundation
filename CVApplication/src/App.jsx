@@ -12,10 +12,10 @@ function App() {
         <Header />
       </Row>
       <Row>
-        <Col>
+        <Col xl={6}>
           <CVForm />
         </Col>
-        <Col>
+        <Col xl={6}>
           <CVPreview />
         </Col>
       </Row>
