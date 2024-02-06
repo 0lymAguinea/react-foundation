@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -6,17 +7,31 @@ import Header from "./components/Header";
 import CVForm from "./components/CVForm";
 import CVPreview from "./components/CVPreview";
 function App() {
+  const [inputValue, setInputValue] = useState({
+    firstName: "",
+    lastName: "",
+    emailAddress: "",
+    mobileNumber: "",
+  });
+
+  const handleChange = (inputName, value) => {
+    setInputValue((prevValues) => ({
+      ...prevValues,
+      [inputName]: value,
+    }));
+  };
+
   return (
     <Container fluid>
       <Row>
         <Header />
       </Row>
       <Row>
-        <Col xl={6}>
-          <CVForm />
+        <Col xl={5}>
+          <CVForm inputValue={inputValue} handleChange={handleChange} />
         </Col>
-        <Col xl={6}>
-          <CVPreview />
+        <Col xl={7}>
+          <CVPreview inputValue={inputValue} />
         </Col>
       </Row>
     </Container>
