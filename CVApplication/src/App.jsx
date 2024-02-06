@@ -8,10 +8,22 @@ import CVForm from "./components/CVForm";
 import CVPreview from "./components/CVPreview";
 function App() {
   const [inputValue, setInputValue] = useState({
+    // Personal information
     firstName: "",
     lastName: "",
     emailAddress: "",
     mobileNumber: "",
+    // Education
+    universityName: "",
+    graduateYear: "",
+    degreeName: "",
+    majorName: "",
+    // Work experience
+    companyName: "",
+    position: "",
+    achievements: "",
+    workDurationFrom: "",
+    workDurationUntil: "",
   });
 
   const handleChange = (inputName, value) => {
