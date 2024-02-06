@@ -1,0 +1,7 @@
+.label::after {
+  content: " *";
+  color: red;
+}
+.sectionTitle {
+  margin: 1rem 0;
+}
