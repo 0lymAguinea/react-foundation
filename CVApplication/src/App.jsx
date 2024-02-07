@@ -2,6 +2,7 @@ import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import "./styles/CVPreview.css";
 
 import Header from "./components/Header";
 import CVForm from "./components/CVForm";
@@ -21,7 +22,8 @@ function App() {
     projectManagement: "",
     // Education
     universityName: "",
-    graduateYear: "",
+    yearStart: "",
+    yearGraduate: "",
     degreeName: "",
     majorName: "",
     // Work experience
@@ -48,7 +50,7 @@ function App() {
         <Col xl={5}>
           <CVForm inputValue={inputValue} handleChange={handleChange} />
         </Col>
-        <Col xl={7}>
+        <Col xl={7} className="CVPreview">
           <CVPreview inputValue={inputValue} />
         </Col>
       </Row>

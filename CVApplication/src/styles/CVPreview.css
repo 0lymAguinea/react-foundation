@@ -1,0 +1,17 @@
+.CVPreview {
+  height: 100%;
+  position: sticky;
+  top: 0;
+}
+.fullName {
+  font-size: 3rem;
+  font-weight: 700;
+}
+.reduceBottomMargin {
+  margin-bottom: -1.5rem;
+  min-height: 5.1rem;
+}
+.contactInfos {
+  font-size: 1.3rem;
+  min-height: 2.5rem;
+}
