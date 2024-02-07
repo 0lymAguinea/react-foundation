@@ -138,13 +138,26 @@ function CreateForm({ title, inputValue, handleChange }) {
           handleChange={(e) => handleChange("universityName", e.target.value)}
           groupID="universityName"
         />
-        <CreateFormGroup
-          inputType="text"
-          label="Year graduate"
-          inputValue={inputValue.graduateYear}
-          handleChange={(e) => handleChange("graduateYear", e.target.value)}
-          groupID="graduateYear"
-        />
+        <Row>
+          <Col>
+            <CreateFormGroup
+              inputType="month"
+              label="School year start"
+              inputValue={inputValue.graduateYear}
+              handleChange={(e) => handleChange("yearStart", e.target.value)}
+              groupID="yearStart"
+            />
+          </Col>
+          <Col>
+            <CreateFormGroup
+              inputType="month"
+              label="School year graduate"
+              inputValue={inputValue.graduateYear}
+              handleChange={(e) => handleChange("yearGraduate", e.target.value)}
+              groupID="yearGraduate"
+            />
+          </Col>
+        </Row>
         <CreateFormGroup
           inputType="text"
           label="Degree"
