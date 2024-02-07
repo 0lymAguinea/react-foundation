@@ -13,6 +13,12 @@ function App() {
     lastName: "",
     emailAddress: "",
     mobileNumber: "",
+    github: "",
+    // Technical skills
+    languages: "",
+    technologiesFrameworks: "",
+    developerTools: "",
+    projectManagement: "",
     // Education
     universityName: "",
     graduateYear: "",

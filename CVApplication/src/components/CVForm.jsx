@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
 
 import "../styles/CVForm.css";
 
@@ -59,28 +61,35 @@ function CreateForm({ title, inputValue, handleChange }) {
           label="First name"
           inputValue={inputValue.firstName}
           handleChange={(e) => handleChange("firstName", e.target.value)}
-          groupID={1}
+          groupID="firstName"
         />
         <CreateFormGroup
           inputType="text"
           label="Last name"
           inputValue={inputValue.lastName}
           handleChange={(e) => handleChange("lastName", e.target.value)}
-          groupID={2}
+          groupID="lastName"
         />
         <CreateFormGroup
           inputType="email"
           label="Email address"
           inputValue={inputValue.emailAddress}
           handleChange={(e) => handleChange("emailAddress", e.target.value)}
-          groupID={3}
+          groupID="emailAddress"
         />
         <CreateFormGroup
           inputType="tel"
           label="Mobile number"
           inputValue={inputValue.mobileNumber}
           handleChange={(e) => handleChange("mobileNumber", e.target.value)}
-          groupID={4}
+          groupID="mobileNumber"
+        />
+        <CreateFormGroup
+          inputType="text"
+          label="GitHub"
+          inputValue={inputValue.github}
+          handleChange={(e) => handleChange("github", e.target.value)}
+          groupID="github"
         />
       </section>
 
@@ -88,31 +97,35 @@ function CreateForm({ title, inputValue, handleChange }) {
       <section>
         <CreateFormGroup
           inputType="text"
-          label="University"
-          inputValue={inputValue.universityName}
-          handleChange={(e) => handleChange("universityName", e.target.value)}
-          groupID={5}
+          label="Programming languages"
+          inputValue={inputValue.languages}
+          handleChange={(e) => handleChange("languages", e.target.value)}
+          groupID="languages"
         />
         <CreateFormGroup
           inputType="text"
-          label="Year graduate"
-          inputValue={inputValue.graduateYear}
-          handleChange={(e) => handleChange("graduateYear", e.target.value)}
-          groupID={6}
+          label="Technoligies / Framework"
+          inputValue={inputValue.technologiesFrameworks}
+          handleChange={(e) =>
+            handleChange("technologiesFrameworks", e.target.value)
+          }
+          groupID="technologiesFrameworks"
         />
         <CreateFormGroup
           inputType="text"
-          label="Degree"
-          inputValue={inputValue.degreeName}
-          handleChange={(e) => handleChange("degreeName", e.target.value)}
-          groupID={7}
+          label="Developer tools"
+          inputValue={inputValue.developerTools}
+          handleChange={(e) => handleChange("developerTools", e.target.value)}
+          groupID="developerTools"
         />
         <CreateFormGroup
           inputType="text"
-          label="Major"
-          inputValue={inputValue.majorName}
-          handleChange={(e) => handleChange("majorName", e.target.value)}
-          groupID={8}
+          label="Project management"
+          inputValue={inputValue.projectManagement}
+          handleChange={(e) =>
+            handleChange("projectManagement", e.target.value)
+          }
+          groupID="projectManagement"
         />
       </section>
 
@@ -120,24 +133,56 @@ function CreateForm({ title, inputValue, handleChange }) {
       <section>
         <CreateFormGroup
           inputType="text"
+          label="University"
+          inputValue={inputValue.universityName}
+          handleChange={(e) => handleChange("universityName", e.target.value)}
+          groupID="universityName"
+        />
+        <CreateFormGroup
+          inputType="text"
+          label="Year graduate"
+          inputValue={inputValue.graduateYear}
+          handleChange={(e) => handleChange("graduateYear", e.target.value)}
+          groupID="graduateYear"
+        />
+        <CreateFormGroup
+          inputType="text"
+          label="Degree"
+          inputValue={inputValue.degreeName}
+          handleChange={(e) => handleChange("degreeName", e.target.value)}
+          groupID="degreeName"
+        />
+        <CreateFormGroup
+          inputType="text"
+          label="Major"
+          inputValue={inputValue.majorName}
+          handleChange={(e) => handleChange("majorName", e.target.value)}
+          groupID="majorName"
+        />
+      </section>
+
+      <SectionTitle title={[title[3]]} />
+      <section>
+        <CreateFormGroup
+          inputType="text"
           label="Company name"
           inputValue={inputValue.companyName}
           handleChange={(e) => handleChange("companyName", e.target.value)}
-          groupID={9}
+          groupID="companyName"
         />
         <CreateFormGroup
           inputType="text"
           label="Position"
           inputValue={inputValue.position}
           handleChange={(e) => handleChange("position", e.target.value)}
-          groupID={10}
+          groupID="position"
         />
         <CreateFormGroup
           inputType=""
           label="Achievements"
           inputValue={inputValue.achievements}
           handleChange={(e) => handleChange("achievements", e.target.value)}
-          groupID={11}
+          groupID="achievements"
           as="textarea"
         />
         <Row className="workDuration">
@@ -149,7 +194,7 @@ function CreateForm({ title, inputValue, handleChange }) {
               handleChange={(e) =>
                 handleChange("workDurationFrom", e.target.value)
               }
-              groupID={12}
+              groupID="workDurationFrom"
             />
           </Col>
           <Col>
@@ -160,7 +205,7 @@ function CreateForm({ title, inputValue, handleChange }) {
               handleChange={(e) =>
                 handleChange("workDurationUntil", e.target.value)
               }
-              groupID={13}
+              groupID="workDurationUntil"
             />
           </Col>
         </Row>
@@ -170,7 +215,12 @@ function CreateForm({ title, inputValue, handleChange }) {
 }
 
 function CVForm({ inputValue, handleChange }) {
-  const formTitles = ["Personal information", "Education", "Work experience"];
+  const formTitles = [
+    "Personal information",
+    "Technical skills",
+    "Education",
+    "Work experience",
+  ];
   return (
     <section>
       <CreateForm
