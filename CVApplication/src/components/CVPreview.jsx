@@ -3,6 +3,8 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "../styles/CVPreview.css";
 
+import { forwardRef } from "react";
+
 function TextOutputMajorDegree({ degree, major }) {
   return (
     <span>
@@ -23,9 +25,9 @@ function TextOutput({ inputValue }) {
   return <p>{inputValue}</p>;
 }
 
-function PreviewBody({ inputValue }) {
+function PreviewBody({ inputValue }, ref) {
   return (
-    <>
+    <div ref={ref}>
       <Row className="reduceBottomMargin">
         <Col className="fullName text-end ">
           <TextOutput inputValue={inputValue.firstName} />
@@ -121,11 +123,10 @@ function PreviewBody({ inputValue }) {
       <Row>
         <TextOutput inputValue={inputValue.achievements} />
       </Row>
-    </>
+    </div>
   );
 }
 
-function CVPreview({ inputValue }) {
-  return <PreviewBody inputValue={inputValue} />;
-}
+const CVPreview = forwardRef(PreviewBody);
+
 export default CVPreview;
