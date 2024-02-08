@@ -5,6 +5,14 @@ import "../styles/CVPreview.css";
 
 import { forwardRef } from "react";
 
+function TextOutputWithBreakpoints({ inputValue }) {
+  const obj = inputValue;
+  const newAchievement = obj
+    .split(".")
+    .map((achievement) => <li key={achievement}>{achievement}</li>);
+  return <ul className="ps-5">{newAchievement}</ul>;
+}
+
 function TextOutputMajorDegree({ degree, major }) {
   return (
     <span>
@@ -96,7 +104,7 @@ function PreviewBody({ inputValue }, ref) {
       <h3>Work experience</h3>
       <Row>
         <Col xl={9}>
-          <TextOutput inputValue={inputValue.companyName} />
+          <TextOutput className="mb-5" inputValue={inputValue.companyName} />
           <TextOutput inputValue={inputValue.position} />
         </Col>
         <Col xl={3} className="text-end mx-0">
@@ -112,16 +120,7 @@ function PreviewBody({ inputValue }, ref) {
         </Col>
       </Row>
       <Row>
-        <Col className="text-end">
-          <TextOutput inputValue={inputValue.workDurationFrom} />
-        </Col>
-        -
-        <Col className="text-start ">
-          <TextOutput inputValue={inputValue.workDurationUntil} />
-        </Col>
-      </Row>
-      <Row>
-        <TextOutput inputValue={inputValue.achievements} />
+        <TextOutputWithBreakpoints inputValue={inputValue.achievements} />
       </Row>
     </div>
   );
