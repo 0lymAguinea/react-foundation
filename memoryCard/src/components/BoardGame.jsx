@@ -2,45 +2,55 @@ import { useEffect, useState } from "react";
 import { Col, Row, Card } from "react-bootstrap";
 
 function MainContent() {
-  const [pokemonName, setPokemonName] = useState([]);
+  const [pokemons, setPokemons] = useState([]);
 
   useEffect(() => {
     async function getPokemon() {
       const max = 100;
       const min = 1;
-      const pokemonSet = new Set();
+      const pokemonMap = new Map();
 
-      while (pokemonSet.size < 12) {
+      while (pokemonMap.size < 12) {
         let randomNum = Math.floor(Math.random() * (max - min + 1) + min);
         const response = await fetch(
           `https://pokeapi.co/api/v2/pokemon/${randomNum}`,
           { method: "GET" }
         );
         const data = await response.json();
-        const pokemon = data.name;
-        pokemonSet.add(pokemon);
+        const pokemonId = data.id;
+        const pokemonName = data.name;
+
+        // Prevent duplicates based on id
+        pokemonMap.set(pokemonId, { id: pokemonId, name: pokemonName });
+        console.log(randomNum);
       }
-      setPokemonName(Array.from(pokemonSet));
+      // Convert map values to an array and set state
+      setPokemons(Array.from(pokemonMap.values()));
     }
     getPokemon();
   }, []);
-  console.log(pokemonName);
   return (
     <main>
       <Row>
-        {pokemonName.slice(0, 6).map((pokemon) => (
-          <Col sm={2} key={pokemon}>
+        {pokemons.slice(0, 6).map((pokemon) => (
+          <Col sm={2} key={pokemon.id}>
             <Card>
-              <Card.Body>{pokemon}</Card.Body>
+              <Card.Img
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+              ></Card.Img>
+              <Card.Body className="fs-4 mx-auto">{pokemon.name}</Card.Body>
             </Card>
           </Col>
         ))}
       </Row>
-      <Row>
-        {pokemonName.slice(6, 12).map((pokemon) => (
-          <Col sm={2} key={pokemon}>
+      <Row className="mt-5">
+        {pokemons.slice(6, 12).map((pokemon) => (
+          <Col sm={2} key={pokemon.id}>
             <Card>
-              <Card.Body>{pokemon}</Card.Body>
+              <Card.Img
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+              ></Card.Img>
+              <Card.Body className="fs-4 mx-auto">{pokemon.name}</Card.Body>
             </Card>
           </Col>
         ))}
