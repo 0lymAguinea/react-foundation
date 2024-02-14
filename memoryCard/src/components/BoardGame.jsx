@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Col, Row, Card } from "react-bootstrap";
+import SyncLoader from "react-spinners/SyncLoader";
 
 function MainContent({ handleScoreIncrease, handleScoreReset }) {
   const [pokemons, setPokemons] = useState([]);
   const [clickedPokemons, setClickedPokemons] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const shuffle = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -49,42 +51,61 @@ function MainContent({ handleScoreIncrease, handleScoreReset }) {
       setPokemons(Array.from(pokemonMap.values()));
     }
     getPokemon();
+    setLoading(false);
   }, []);
   return (
-    <main>
-      <Row className="mt-5">
-        {pokemons.slice(0, 6).map((pokemon) => (
-          <Col sm={2} key={pokemon.id}>
-            <Card onClick={handleClicking}>
-              <Card.Img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
-                className="mx-auto"
-                alt={pokemon.name}
-              ></Card.Img>
-              <Card.Body className="fs-4 mx-auto pokemonName">
-                {pokemon.name}
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-      <Row className="mt-5">
-        {pokemons.slice(6, 12).map((pokemon) => (
-          <Col sm={2} key={pokemon.id}>
-            <Card onClick={handleClicking}>
-              <Card.Img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
-                className="mx-auto"
-                alt={pokemon.name}
-              ></Card.Img>
-              <Card.Body className="fs-4 mx-auto pokemonName">
-                {pokemon.name}
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </main>
+    <>
+      {loading ? (
+        <>
+          <SyncLoader
+            color="#1a3ae1"
+            cssOverride={{}}
+            margin={5}
+            size={100}
+            loading={loading}
+            className="loaderLoc"
+          />
+          <p className="loadingInfo fs-1 fw-bold">
+            Catching pokemons. Please wait.
+          </p>
+        </>
+      ) : (
+        <main>
+          <Row className="mt-5">
+            {pokemons.slice(0, 6).map((pokemon) => (
+              <Col sm={2} key={pokemon.id}>
+                <Card onClick={handleClicking}>
+                  <Card.Img
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
+                    className="mx-auto"
+                    alt={pokemon.name}
+                  ></Card.Img>
+                  <Card.Body className="fs-4 mx-auto pokemonName">
+                    {pokemon.name}
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+          <Row className="mt-5">
+            {pokemons.slice(6, 12).map((pokemon) => (
+              <Col sm={2} key={pokemon.id}>
+                <Card onClick={handleClicking}>
+                  <Card.Img
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
+                    className="mx-auto"
+                    alt={pokemon.name}
+                  ></Card.Img>
+                  <Card.Body className="fs-4 mx-auto pokemonName">
+                    {pokemon.name}
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </main>
+      )}
+    </>
   );
 }
 
@@ -92,12 +113,12 @@ function Header({ score, highestScore }) {
   return (
     <header>
       <Row>
-        <Col md={4}>
+        <Col sm={4}>
           <h1 className="text-center">Gotta Catch &apos;Em All!</h1>
         </Col>
-        <Col md={8} className="text-center">
-          <span className="fs-2 me-5">Score: {score}</span>
-          <span className="fs-2 ms-5">Highest score: {highestScore}</span>
+        <Col sm={8} className="text-center">
+          <span className="fs-3 me-5">Score: {score}</span>
+          <span className="fs-3 ">Highest score: {highestScore}</span>
         </Col>
       </Row>
     </header>
