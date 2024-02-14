@@ -61,7 +61,7 @@ function MainContent({ handleScoreIncrease, handleScoreReset }) {
                 className="mx-auto"
                 alt={pokemon.name}
               ></Card.Img>
-              <Card.Body className="fs-4 mx-auto" values={pokemon.name}>
+              <Card.Body className="fs-4 mx-auto pokemonName">
                 {pokemon.name}
               </Card.Body>
             </Card>
@@ -77,7 +77,9 @@ function MainContent({ handleScoreIncrease, handleScoreReset }) {
                 className="mx-auto"
                 alt={pokemon.name}
               ></Card.Img>
-              <Card.Body className="fs-4 mx-auto">{pokemon.name}</Card.Body>
+              <Card.Body className="fs-4 mx-auto pokemonName">
+                {pokemon.name}
+              </Card.Body>
             </Card>
           </Col>
         ))}
