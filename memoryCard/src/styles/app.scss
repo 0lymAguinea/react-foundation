@@ -1,0 +1,21 @@
+body {
+  background-image: url("/src/assets/img/pokemons.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h1,
+span,
+.pokemonName {
+  color: yellow; /* Inner content color */
+  text-shadow: -2px -2px 0 blue, 2px -2px 0 blue, -2px 2px 0 blue,
+    2px 2px 0 blue;
+}
+.pokemonName {
+  text-transform: capitalize;
+}
+
+.card {
+  border: none;
+  background-color: transparent;
+}
