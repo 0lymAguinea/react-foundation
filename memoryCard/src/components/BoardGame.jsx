@@ -1,8 +1,30 @@
 import { useEffect, useState } from "react";
 import { Col, Row, Card } from "react-bootstrap";
 
-function MainContent() {
+function MainContent({ handleScoreIncrease, handleScoreReset }) {
   const [pokemons, setPokemons] = useState([]);
+  const [clickedPokemons, setClickedPokemons] = useState([]);
+
+  const shuffle = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      let temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+  };
+
+  const handleClicking = (e) => {
+    if (clickedPokemons.includes(e.target.alt)) {
+      setClickedPokemons([]);
+      handleScoreReset();
+      shuffle(pokemons);
+    } else {
+      setClickedPokemons([...clickedPokemons, e.target.alt]);
+      handleScoreIncrease();
+      shuffle(pokemons);
+    }
+  };
 
   useEffect(() => {
     async function getPokemon() {
@@ -22,7 +44,6 @@ function MainContent() {
 
         // Prevent duplicates based on id
         pokemonMap.set(pokemonId, { id: pokemonId, name: pokemonName });
-        console.log(randomNum);
       }
       // Convert map values to an array and set state
       setPokemons(Array.from(pokemonMap.values()));
@@ -31,14 +52,18 @@ function MainContent() {
   }, []);
   return (
     <main>
-      <Row>
+      <Row className="mt-5">
         {pokemons.slice(0, 6).map((pokemon) => (
           <Col sm={2} key={pokemon.id}>
-            <Card>
+            <Card onClick={handleClicking}>
               <Card.Img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
+                className="mx-auto"
+                alt={pokemon.name}
               ></Card.Img>
-              <Card.Body className="fs-4 mx-auto">{pokemon.name}</Card.Body>
+              <Card.Body className="fs-4 mx-auto" values={pokemon.name}>
+                {pokemon.name}
+              </Card.Body>
             </Card>
           </Col>
         ))}
@@ -46,9 +71,11 @@ function MainContent() {
       <Row className="mt-5">
         {pokemons.slice(6, 12).map((pokemon) => (
           <Col sm={2} key={pokemon.id}>
-            <Card>
+            <Card onClick={handleClicking}>
               <Card.Img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
+                className="mx-auto"
+                alt={pokemon.name}
               ></Card.Img>
               <Card.Body className="fs-4 mx-auto">{pokemon.name}</Card.Body>
             </Card>
@@ -63,12 +90,12 @@ function Header({ score, highestScore }) {
   return (
     <header>
       <Row>
-        <Col md={3}>
-          <h1>Gotta Catch &apos;Em All!</h1>
+        <Col md={4}>
+          <h1 className="text-center">Gotta Catch &apos;Em All!</h1>
         </Col>
-        <Col md={9}>
-          Score:{score}
-          highestScore:{highestScore}
+        <Col md={8} className="text-center">
+          <span className="fs-2 me-5">Score: {score}</span>
+          <span className="fs-2 ms-5">Highest score: {highestScore}</span>
         </Col>
       </Row>
     </header>
@@ -97,7 +124,10 @@ function BoardGame() {
   return (
     <>
       <Header score={score} highestScore={highestScore} />
-      <MainContent />
+      <MainContent
+        handleScoreIncrease={handleScoreIncrease}
+        handleScoreReset={handleScoreReset}
+      />
     </>
   );
 }
