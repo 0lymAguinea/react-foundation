@@ -1,0 +1,19 @@
+span.brand {
+  color: #f7725b;
+}
+.homePage {
+  min-height: 90vh;
+}
+.toShopButton {
+  display: block;
+  margin: 0 auto;
+}
+main {
+  text-align: center;
+}
+
+@media screen and (max-width: 991px) {
+  main {
+    text-align: end;
+  }
+}
