@@ -1,0 +1,13 @@
+nav {
+  min-height: fit-content;
+}
+.brand {
+  color: #f7725b;
+}
+a.brand {
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  text-decoration-line: underline;
+}
