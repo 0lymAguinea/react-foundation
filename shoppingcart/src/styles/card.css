@@ -1,0 +1,7 @@
+.card img {
+  max-width: 50%;
+  min-height: 10rem;
+}
+.card {
+  min-height: 25rem;
+}
