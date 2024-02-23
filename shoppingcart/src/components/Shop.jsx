@@ -14,10 +14,6 @@ import ItemsCards from "./ItemCards";
 import useInitialProducts from "../hooks/useInitialProducts";
 import "../styles/shop.css";
 
-function Cart({ cart }) {
-  return <h1>Cart{cart} </h1>;
-}
-
 function SearchInput(props) {
   return (
     <Form className="mt-3">
@@ -37,23 +33,25 @@ function SearchInput(props) {
     </Form>
   );
 }
-function ItemColsCard({ item }) {
+function ItemColsCard({ item, handleAddToCart }) {
   return (
     <Col md={3}>
       <ItemsCards
+        id={item.id}
         title={item.title}
         price={item.price}
         description={item.description}
         category={item.category}
         image={item.image}
+        rating={item.rating}
+        handleAddToCart={handleAddToCart}
       />
     </Col>
   );
 }
 
-function Shop() {
+function Shop({ handleAddToCart }) {
   const [search, setSearch] = useState("");
-  const [cart, setCart] = useState(0);
   const [isSearch, setIsSearch] = useState(false);
   const { initialItems, initialError, initialLoading } = useInitialProducts();
 
@@ -79,19 +77,30 @@ function Shop() {
             search={search}
             handleSearchChange={handleSearchChange}
           />
-          <Cart cart={cart} />
         </Row>
-        <Row>
-          {isSearch
-            ? initialItems
-                .filter((item) =>
-                  item.title.toLowerCase().includes(search.toLowerCase())
-                )
-                .map((item) => <ItemColsCard item={item} key={item.id} />)
-            : initialItems.map((item) => (
-                <ItemColsCard item={item} key={item.id} />
-              ))}
-        </Row>
+        <main className="mt-5">
+          <Row>
+            {isSearch
+              ? initialItems
+                  .filter((item) =>
+                    item.title.toLowerCase().includes(search.toLowerCase())
+                  )
+                  .map((item) => (
+                    <ItemColsCard
+                      item={item}
+                      handleAddToCart={handleAddToCart}
+                      key={item.id}
+                    />
+                  ))
+              : initialItems.map((item) => (
+                  <ItemColsCard
+                    item={item}
+                    handleAddToCart={handleAddToCart}
+                    key={item.id}
+                  />
+                ))}
+          </Row>
+        </main>
         <Row></Row>
       </Container>
     </>
@@ -106,6 +115,7 @@ SearchInput.propTypes = {
 
 ItemColsCard.propTypes = {
   item: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
