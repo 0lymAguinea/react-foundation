@@ -1,7 +1,17 @@
 import { Card, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 import "../styles/card.css";
+import { oneOfType } from "prop-types";
 function ItemsCards(props) {
+  const itemInfo = [
+    props.id,
+    props.title,
+    props.price,
+    props.description,
+    props.category,
+    props.image,
+    props.rating,
+  ];
   return (
     <Card className="mb-4">
       <Card.Img
@@ -14,7 +24,11 @@ function ItemsCards(props) {
         <Card.Text>
           <span>$</span> {props.price}
         </Card.Text>
-        <Button type="button" className="float-right">
+        <Button
+          type="button"
+          className="float-right"
+          onClick={() => props.handleAddToCart(itemInfo)}
+        >
           Add to Cart
         </Button>
       </Card.Body>
@@ -23,9 +37,14 @@ function ItemsCards(props) {
 }
 
 ItemsCards.propTypes = {
+  id: oneOfType([PropTypes.string, PropTypes.number]),
   image: PropTypes.string,
   title: PropTypes.string,
   price: PropTypes.number,
+  description: PropTypes.string,
+  category: PropTypes.string,
+  rating: PropTypes.object,
+  handleAddToCart: PropTypes.func,
 };
 
 ItemsCards;
