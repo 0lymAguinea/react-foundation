@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "../styles/navbar.css";
 import { Link } from "react-router-dom";
-function Header() {
+function Header(props) {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -23,6 +23,8 @@ function Header() {
             </Link>
           </Nav>
         </Navbar.Collapse>
+        Cart
+        <span>{props.cart.length}</span>
       </Container>
     </Navbar>
   );
