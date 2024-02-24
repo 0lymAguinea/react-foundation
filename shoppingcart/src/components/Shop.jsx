@@ -8,7 +8,7 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import PropTypes, { oneOfType } from "prop-types";
 import { IoSearchCircle } from "react-icons/io5";
 import ItemsCards from "./ItemCards";
 import useInitialProducts from "../hooks/useInitialProducts";
@@ -44,6 +44,7 @@ function ItemColsCard({ item, handleAddToCart }) {
         category={item.category}
         image={item.image}
         rating={item.rating}
+        quantity={1}
         handleAddToCart={handleAddToCart}
       />
     </Col>
@@ -115,12 +116,14 @@ SearchInput.propTypes = {
 
 ItemColsCard.propTypes = {
   item: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    id: oneOfType([PropTypes.string, PropTypes.number]),
+    image: PropTypes.string,
+    title: PropTypes.string,
+    price: PropTypes.number,
+    description: PropTypes.string,
+    category: PropTypes.string,
+    rating: PropTypes.object,
+    handleAddToCart: PropTypes.func,
   }).isRequired,
 };
 export default Shop;
