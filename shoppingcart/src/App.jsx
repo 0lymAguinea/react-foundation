@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Shop from "./components/Shop";
 import Cart from "./components/Cart";
+import PropTypes, { oneOfType } from "prop-types";
 function App() {
   const [cart, setCart] = useState([]);
   const [productId, setProductId] = useState([]);
@@ -14,19 +15,21 @@ function App() {
     const newItem = {
       id: props.id,
       title: props.title,
-      props: props.price,
+      price: props.price,
       description: props.description,
       category: props.category,
       image: props.image,
       rating: props.rating,
-      quantity: 1,
+      quantity: props.quantity,
     };
-
     if (productId.includes(newItem.id)) {
       setCart((prevCart) => {
         const updatedCart = prevCart.map((item) =>
           item.id === newItem.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? {
+                ...item,
+                quantity: Number(item.quantity) + Number(newItem.quantity),
+              }
             : item
         );
         return updatedCart;
@@ -53,5 +56,16 @@ function App() {
     </>
   );
 }
+
+App.propTypes = {
+  id: oneOfType([PropTypes.string, PropTypes.number]),
+  image: PropTypes.string,
+  title: PropTypes.string,
+  price: PropTypes.number,
+  description: PropTypes.string,
+  category: PropTypes.string,
+  rating: PropTypes.object,
+  quantity: PropTypes.number,
+};
 
 export default App;
