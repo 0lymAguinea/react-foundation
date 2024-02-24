@@ -1,38 +1,11 @@
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  FloatingLabel,
-  Button,
-  InputGroup,
-} from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import PropTypes, { oneOfType } from "prop-types";
-import { IoSearchCircle } from "react-icons/io5";
 import ItemsCards from "./ItemCards";
 import useInitialProducts from "../hooks/useInitialProducts";
 import "../styles/shop.css";
+import SearchInput from "./Search";
 
-function SearchInput(props) {
-  return (
-    <Form className="mt-3">
-      <InputGroup>
-        <FloatingLabel controlId="searchInput" label="Search  product">
-          <Form.Control
-            type="search"
-            placeholder="RTX 4090"
-            value={props.search}
-            onChange={(e) => props.handleSearchChange(e)}
-          />
-        </FloatingLabel>
-        <Button type="submit" alt="Search">
-          <IoSearchCircle style={{ height: "2rem", width: "2rem" }} alt="" />
-        </Button>
-      </InputGroup>
-    </Form>
-  );
-}
 function ItemColsCard({ item, handleAddToCart }) {
   return (
     <Col md={3}>
@@ -54,6 +27,7 @@ function ItemColsCard({ item, handleAddToCart }) {
 function Shop({ handleAddToCart }) {
   const [search, setSearch] = useState("");
   const [isSearch, setIsSearch] = useState(false);
+
   const { initialItems, initialError, initialLoading } = useInitialProducts();
 
   const handleSearchChange = (e) => {
@@ -107,6 +81,9 @@ function Shop({ handleAddToCart }) {
     </>
   );
 }
+Shop.propTypes = {
+  handleAddToCart: PropTypes.func,
+};
 
 SearchInput.propTypes = {
   handleSearchChange: PropTypes.func,
