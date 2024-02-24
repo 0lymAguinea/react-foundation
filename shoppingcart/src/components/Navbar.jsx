@@ -3,6 +3,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "../styles/navbar.css";
 import { Link } from "react-router-dom";
+import { IoMdCart } from "react-icons/io";
+
 function Header(props) {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -23,7 +25,9 @@ function Header(props) {
             </Link>
           </Nav>
         </Navbar.Collapse>
-        Cart
+        <Link to="cart">
+          <IoMdCart className="fs-2 my-auto" />
+        </Link>
         <span>{props.cart.length}</span>
       </Container>
     </Navbar>
