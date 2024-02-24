@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import "../styles/card.css";
 import { oneOfType } from "prop-types";
 function ItemsCards(props) {
-  const itemInfo = [
-    props.id,
-    props.title,
-    props.price,
-    props.description,
-    props.category,
-    props.image,
-    props.rating,
-  ];
+  const itemInfo = {
+    id: props.id,
+    title: props.title,
+    props: props.price,
+    description: props.description,
+    category: props.category,
+    image: props.image,
+    rating: props.rating,
+  };
   return (
     <Card className="mb-4">
       <Card.Img
@@ -46,6 +46,4 @@ ItemsCards.propTypes = {
   rating: PropTypes.object,
   handleAddToCart: PropTypes.func,
 };
-
-ItemsCards;
 export default ItemsCards;
