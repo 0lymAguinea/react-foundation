@@ -26,7 +26,7 @@ function ItemsCards(props) {
   const itemInfo = {
     id: props.id,
     title: props.title,
-    props: props.price,
+    price: props.price,
     description: props.description,
     category: props.category,
     image: props.image,
