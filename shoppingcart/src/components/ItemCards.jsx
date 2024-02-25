@@ -1,27 +1,16 @@
 import { Card, Button, Row, InputGroup, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import useCounterInput from "../hooks/useCounterInput";
 import "../styles/card.css";
 
 import { oneOfType } from "prop-types";
 function ItemsCards(props) {
-  let [itemCounter, setItemCounter] = useState(1);
-
-  const handleCounterInput = (e) => {
-    const inputValue = e.target.value;
-
-    setItemCounter(inputValue);
-  };
-
-  const handleCounterIncrement = () => {
-    setItemCounter(parseInt(itemCounter) + 1);
-  };
-
-  const handleCounterDecrement = () => {
-    if (itemCounter > 1) {
-      setItemCounter(itemCounter - 1);
-    }
-  };
+  const {
+    itemCounter,
+    handleCounterInput,
+    handleCounterIncrement,
+    handleCounterDecrement,
+  } = useCounterInput(1);
 
   const itemInfo = {
     id: props.id,
