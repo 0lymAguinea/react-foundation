@@ -1,0 +1,11 @@
+.cartImages {
+  width: 7.5rem;
+  height: fit-content;
+}
+
+.itemCheckoutContainer {
+  height: fit-content;
+}
+.itemImageContainer {
+  max-width: fit-content;
+}
