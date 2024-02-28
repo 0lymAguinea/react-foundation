@@ -27,6 +27,7 @@ function ItemsCards(props) {
       <Card.Img
         src={props.image}
         style={{ width: "13rem" }}
+        alt={props.title}
         className="text-center mx-auto mt-3"
       />
       <Card.Body>
@@ -36,7 +37,12 @@ function ItemsCards(props) {
         </Card.Text>
         <Row>
           <InputGroup>
-            <Button onClick={handleCounterDecrement}>-</Button>
+            <Button
+              onClick={handleCounterDecrement}
+              alt="Decrement item quantity"
+            >
+              -
+            </Button>
             <Form.Control
               id={props.id}
               type="number"
@@ -44,8 +50,14 @@ function ItemsCards(props) {
               min={1}
               max={50}
               onChange={(e) => handleCounterInput(e)}
+              aria-label="Item quantity"
             ></Form.Control>
-            <Button onClick={handleCounterIncrement}>+</Button>
+            <Button
+              onClick={handleCounterIncrement}
+              alt="Increment item quantity"
+            >
+              +
+            </Button>
           </InputGroup>
           <Button
             type="button"

@@ -12,7 +12,7 @@ function SearchInput(props) {
             onChange={(e) => props.handleSearchChange(e)}
           />
         </FloatingLabel>
-        <Button type="submit" alt="Search">
+        <Button type="submit" aria-label="Search">
           <IoSearchCircle style={{ height: "2rem", width: "2rem" }} alt="" />
         </Button>
       </InputGroup>

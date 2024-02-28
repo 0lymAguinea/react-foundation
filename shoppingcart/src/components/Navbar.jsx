@@ -25,8 +25,8 @@ function Header(props) {
             </Link>
           </Nav>
         </Navbar.Collapse>
-        <Link to="cart">
-          <IoMdCart className="fs-2 my-auto" />
+        <Link to="cart" aria-label="Cart page">
+          <IoMdCart className="fs-2 my-auto" alt="" />
         </Link>
         <span>{props.cart.length}</span>
       </Container>
