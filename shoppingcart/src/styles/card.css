@@ -1,7 +1,10 @@
-.card img {
-  max-width: 50%;
-  min-height: 10rem;
-}
 .card {
-  min-height: 25rem;
+  height: max-content;
+}
+.card img {
+  height: 13rem;
+  object-fit: contain;
+}
+.card-body:first-child {
+  height: 10px;
 }

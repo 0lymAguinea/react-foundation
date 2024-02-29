@@ -26,7 +26,6 @@ function ItemsCards(props) {
     <Card className="mb-4">
       <Card.Img
         src={props.image}
-        style={{ width: "13rem" }}
         alt={props.title}
         className="text-center mx-auto mt-3"
       />
@@ -35,39 +34,39 @@ function ItemsCards(props) {
         <Card.Text>
           <span>$</span> {props.price}
         </Card.Text>
-        <Row>
-          <InputGroup>
-            <Button
-              onClick={handleCounterDecrement}
-              alt="Decrement item quantity"
-            >
-              -
-            </Button>
-            <Form.Control
-              id={props.id}
-              type="number"
-              value={itemCounter}
-              min={1}
-              max={50}
-              onChange={(e) => handleCounterInput(e)}
-              aria-label="Item quantity"
-            ></Form.Control>
-            <Button
-              onClick={handleCounterIncrement}
-              alt="Increment item quantity"
-            >
-              +
-            </Button>
-          </InputGroup>
+      </Card.Body>
+      <Card.Body>
+        <InputGroup>
           <Button
-            type="button"
-            className="float-right"
-            onClick={() => props.handleAddToCart(itemInfo)}
-            disabled={itemCounter === "" || itemCounter === "0"}
+            onClick={handleCounterDecrement}
+            alt="Decrement item quantity"
           >
-            Add to Cart
+            -
           </Button>
-        </Row>
+          <Form.Control
+            id={props.id}
+            type="number"
+            value={itemCounter}
+            min={1}
+            max={50}
+            onChange={(e) => handleCounterInput(e)}
+            aria-label="Item quantity"
+          ></Form.Control>
+          <Button
+            onClick={handleCounterIncrement}
+            alt="Increment item quantity"
+          >
+            +
+          </Button>
+        </InputGroup>
+        <Button
+          type="button"
+          className="float-right mt-3"
+          onClick={() => props.handleAddToCart(itemInfo)}
+          disabled={itemCounter === "" || itemCounter === "0"}
+        >
+          Add to Cart
+        </Button>
       </Card.Body>
     </Card>
   );
