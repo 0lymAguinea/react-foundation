@@ -3,6 +3,25 @@ import "../styles/cart.css";
 import { MdDeleteForever } from "react-icons/md";
 import useCounterInput from "../hooks/useCounterInput";
 
+function Checkout({ cart }) {
+  const totalPrice = cart.reduce((accu, item) => {
+    return accu + item.price * item.quantity;
+  }, 0);
+  return (
+    <>
+      <ul>
+        {cart.map((item) => (
+          <li key={item.id} className="list-unstyled">
+            <p>{item.title}</p>
+            <p>{item.price * item.quantity}</p>
+          </li>
+        ))}
+        <p>Total: ${totalPrice}</p>
+      </ul>
+    </>
+  );
+}
+
 function ItemList({ item, setCart, handleCartDelete }) {
   const { itemCounter, handleCartCounter } = useCounterInput(
     item.quantity,
@@ -65,7 +84,7 @@ function Cart({ cart, setCart, handleCartDelete }) {
         </Col>
         <Col md={5}>
           <Card className="mt-4">
-            <Card.Title className="fs-3">Checkout</Card.Title>
+            <Checkout cart={cart} />
           </Card>
         </Col>
       </Row>
