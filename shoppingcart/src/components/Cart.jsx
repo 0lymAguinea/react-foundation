@@ -9,14 +9,15 @@ function Checkout({ cart }) {
   }, 0);
   return (
     <>
-      <ul>
+      <p className="fs-2 ms-4">Checkout</p>
+      <ul className="pe-3">
         {cart.map((item) => (
           <li key={item.id} className="list-unstyled">
             <p>{item.title}</p>
             <p>{item.price * item.quantity}</p>
           </li>
         ))}
-        <p>Total: ${totalPrice}</p>
+        <p>Total: ${totalPrice.toFixed(2)}</p>
       </ul>
     </>
   );
@@ -28,7 +29,7 @@ function ItemList({ item, setCart, handleCartDelete }) {
     setCart
   );
 
-  const total = item.price * itemCounter;
+  const totalPrice = item.price * item.quantity;
 
   return (
     <Row className="my-4 itemCheckoutContainer border border-dark-subtle">
@@ -53,7 +54,7 @@ function ItemList({ item, setCart, handleCartDelete }) {
           <Button onClick={() => handleCartCounter(item, "+")}>+</Button>
         </p>
         <p className="">Price: ${item.price}</p>
-        <p>Total: ${total}</p>
+        <p>Total: ${totalPrice}</p>
         <span>
           <Button variant="danger" onClick={() => handleCartDelete(item.id)}>
             <MdDeleteForever />
@@ -83,7 +84,7 @@ function Cart({ cart, setCart, handleCartDelete }) {
           ))}
         </Col>
         <Col md={5}>
-          <Card className="mt-4">
+          <Card className="mt-4 checkoutCard">
             <Checkout cart={cart} />
           </Card>
         </Col>
