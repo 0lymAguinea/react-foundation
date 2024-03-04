@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import PropTypes, { oneOfType } from "prop-types";
 import ItemsCards from "./ItemCards";
 import useInitialProducts from "../hooks/useInitialProducts";
-import "../styles/shop.css";
 import SearchInput from "./Search";
 
 function ItemColsCard({ item, handleAddToCart }) {
