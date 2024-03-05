@@ -43,7 +43,8 @@ function Shop({ handleAddToCart }) {
     }
   }, [search]);
 
-  if (initialError) return <p>A network error was encountered</p>;
+  if (initialError)
+    return <p className="fs-1 text-center">A network error was encountered</p>;
   if (initialLoading)
     return (
       <div className="text-center my-5">

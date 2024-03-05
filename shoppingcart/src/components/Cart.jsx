@@ -2,6 +2,7 @@ import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import "../styles/cart.css";
 import { MdDeleteForever } from "react-icons/md";
 import useCounterInput from "../hooks/useCounterInput";
+import { Link } from "react-router-dom";
 
 function Checkout({ cart }) {
   const totalPrice = cart.reduce((accu, item) => {
@@ -67,7 +68,14 @@ function ItemList({ item, setCart, handleCartDelete }) {
 
 function Cart({ cart, setCart, handleCartDelete }) {
   if (cart.length === 0) {
-    return <h1>NO ITEMS</h1>;
+    return (
+      <div className="text-center my-5">
+        <p className="fs-1">No items found</p>
+        <Link to="/shop" className="fs-3">
+          Start shopping
+        </Link>
+      </div>
+    );
   }
 
   return (
