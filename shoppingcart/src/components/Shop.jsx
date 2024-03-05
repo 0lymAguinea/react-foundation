@@ -28,6 +28,12 @@ function Shop({ handleAddToCart }) {
   const { initialItems, initialError, initialLoading } = useInitialProducts();
   const { search, isSearch, handleSearchChange } = useSearchItems();
 
+  const filteredItems = isSearch
+    ? initialItems.filter((item) =>
+        item.title.toLowerCase().includes(search.toLowerCase())
+      )
+    : [];
+
   const spinnerCOLOR = "#d6290a";
 
   if (initialError)
@@ -55,25 +61,27 @@ function Shop({ handleAddToCart }) {
         </Row>
         <main className="mt-5">
           <Row>
-            {isSearch
-              ? initialItems
-                  .filter((item) =>
-                    item.title.toLowerCase().includes(search.toLowerCase())
-                  )
-                  .map((item) => (
-                    <ItemColsCard
-                      item={item}
-                      handleAddToCart={handleAddToCart}
-                      key={item.id}
-                    />
-                  ))
-              : initialItems.map((item) => (
+            {isSearch ? (
+              filteredItems.length === 0 ? (
+                <p className="fs-1 text-center">No items found</p>
+              ) : (
+                filteredItems.map((item) => (
                   <ItemColsCard
                     item={item}
                     handleAddToCart={handleAddToCart}
                     key={item.id}
                   />
-                ))}
+                ))
+              )
+            ) : (
+              initialItems.map((item) => (
+                <ItemColsCard
+                  item={item}
+                  handleAddToCart={handleAddToCart}
+                  key={item.id}
+                />
+              ))
+            )}
           </Row>
         </main>
         <Row></Row>
