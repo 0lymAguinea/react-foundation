@@ -1,10 +1,10 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { useEffect, useState } from "react";
 import PropTypes, { oneOfType } from "prop-types";
 import ItemsCards from "./ItemCards";
 import useInitialProducts from "../hooks/useInitialProducts";
 import SearchInput from "./Search";
 import ClipLoader from "react-spinners/ClipLoader";
+import useSearchItems from "../hooks/useSearchItems";
 
 function ItemColsCard({ item, handleAddToCart }) {
   return (
@@ -25,23 +25,10 @@ function ItemColsCard({ item, handleAddToCart }) {
 }
 
 function Shop({ handleAddToCart }) {
-  const [search, setSearch] = useState("");
-  const [isSearch, setIsSearch] = useState(false);
   const { initialItems, initialError, initialLoading } = useInitialProducts();
+  const { search, isSearch, handleSearchChange } = useSearchItems();
 
   const spinnerCOLOR = "#d6290a";
-
-  const handleSearchChange = (e) => {
-    setSearch(e.target.value);
-  };
-
-  useEffect(() => {
-    if (search === "") {
-      setIsSearch(false);
-    } else {
-      setIsSearch(true);
-    }
-  }, [search]);
 
   if (initialError)
     return <p className="fs-1 text-center">A network error was encountered</p>;
