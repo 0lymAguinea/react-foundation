@@ -4,6 +4,7 @@ import PropTypes, { oneOfType } from "prop-types";
 import ItemsCards from "./ItemCards";
 import useInitialProducts from "../hooks/useInitialProducts";
 import SearchInput from "./Search";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function ItemColsCard({ item, handleAddToCart }) {
   return (
@@ -26,8 +27,9 @@ function ItemColsCard({ item, handleAddToCart }) {
 function Shop({ handleAddToCart }) {
   const [search, setSearch] = useState("");
   const [isSearch, setIsSearch] = useState(false);
-
   const { initialItems, initialError, initialLoading } = useInitialProducts();
+
+  const spinnerCOLOR = "#d6290a";
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
@@ -42,7 +44,18 @@ function Shop({ handleAddToCart }) {
   }, [search]);
 
   if (initialError) return <p>A network error was encountered</p>;
-  if (initialLoading) return <p>Loading...</p>;
+  if (initialLoading)
+    return (
+      <div className="text-center my-5">
+        <ClipLoader
+          color={spinnerCOLOR}
+          size={170}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+        <p className="fs-3">Loading...</p>
+      </div>
+    );
   return (
     <>
       <Container>
