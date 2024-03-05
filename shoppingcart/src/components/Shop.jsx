@@ -112,7 +112,7 @@ ItemColsCard.propTypes = {
     description: PropTypes.string,
     category: PropTypes.string,
     rating: PropTypes.object,
-    handleAddToCart: PropTypes.func,
   }).isRequired,
+  handleAddToCart: PropTypes.func,
 };
 export default Shop;
