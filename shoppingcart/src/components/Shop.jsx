@@ -7,7 +7,7 @@ import SearchInput from "./Search";
 
 function ItemColsCard({ item, handleAddToCart }) {
   return (
-    <Col md={3}>
+    <Col md={6} lg={3}>
       <ItemsCards
         id={item.id}
         title={item.title}
