@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import PropTypes, { oneOfType } from "prop-types";
 import ItemsCards from "./ItemCards";
-import useInitialProducts from "../hooks/useInitialProducts";
+
 import SearchInput from "./Search";
 import ClipLoader from "react-spinners/ClipLoader";
 import useSearchItems from "../hooks/useSearchItems";
@@ -90,6 +90,9 @@ function Shop({ initialItems, initialError, initialLoading, handleAddToCart }) {
 }
 Shop.propTypes = {
   handleAddToCart: PropTypes.func,
+  initialItems: PropTypes.array,
+  initialLoading: PropTypes.bool,
+  initialError: PropTypes.string,
 };
 
 SearchInput.propTypes = {
