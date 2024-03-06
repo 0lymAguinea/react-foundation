@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import { Route, Routes } from "react-router-dom";
+import useInitialProducts from "./hooks/useInitialProducts";
 import useCart from "./hooks/useCart";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
@@ -10,6 +11,8 @@ import PropTypes, { oneOfType } from "prop-types";
 function App() {
   const { cart, setCart, handleAddToCart, handleCartDelete } = useCart();
 
+  const { initialItems, initialError, initialLoading } = useInitialProducts();
+
   return (
     <>
       <Navbar cart={cart} />
@@ -18,7 +21,14 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route
             path="/shop"
-            element={<Shop handleAddToCart={handleAddToCart} />}
+            element={
+              <Shop
+                initialItems={initialItems}
+                initialError={initialError}
+                initialLoading={initialLoading}
+                handleAddToCart={handleAddToCart}
+              />
+            }
           />
           <Route
             path="/cart"

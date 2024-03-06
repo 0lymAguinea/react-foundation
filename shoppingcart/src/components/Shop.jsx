@@ -24,8 +24,7 @@ function ItemColsCard({ item, handleAddToCart }) {
   );
 }
 
-function Shop({ handleAddToCart }) {
-  const { initialItems, initialError, initialLoading } = useInitialProducts();
+function Shop({ initialItems, initialError, initialLoading, handleAddToCart }) {
   const { search, isSearch, handleSearchChange } = useSearchItems();
 
   const filteredItems = isSearch
