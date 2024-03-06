@@ -1,10 +1,13 @@
 .card {
-  height: max-content;
+  height: 100%;
 }
 .card img {
   height: 13rem;
   object-fit: contain;
 }
-.card-body:first-child {
-  height: 10px;
+.card-body:last-of-type {
+  display: inline-flex;
+  align-items: stretch;
+  flex-direction: column;
+  justify-content: flex-end;
 }

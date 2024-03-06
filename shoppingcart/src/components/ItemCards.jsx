@@ -23,19 +23,17 @@ function ItemsCards(props) {
     quantity: itemCounter,
   };
   return (
-    <Card className="mb-4">
+    <Card className="mb-3">
       <Card.Img
         src={props.image}
         alt={props.title}
         className="text-center mx-auto mt-3"
       />
       <Card.Body>
-        <Card.Title>{props.title}</Card.Title>
-        <Card.Text>
-          <span>$</span> {props.price}
-        </Card.Text>
+        <Card.Title className="text-start">{props.title}</Card.Title>
+        <Card.Text>${props.price}</Card.Text>
       </Card.Body>
-      <Card.Body>
+      <Card.Body className="">
         <InputGroup>
           <Button
             onClick={handleCounterDecrement}
@@ -63,7 +61,9 @@ function ItemsCards(props) {
           type="button"
           className="float-right mt-3"
           onClick={() => props.handleAddToCart(itemInfo)}
-          disabled={itemCounter === "" || itemCounter === "0"}
+          disabled={
+            itemCounter === "" || itemCounter === "0" || itemCounter === "50"
+          }
         >
           Add to Cart
         </Button>

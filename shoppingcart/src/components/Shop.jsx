@@ -8,7 +8,7 @@ import useSearchItems from "../hooks/useSearchItems";
 
 function ItemColsCard({ item, handleAddToCart }) {
   return (
-    <Col md={6} lg={3}>
+    <Col md={6} lg={3} className="mb-4">
       <ItemsCards
         id={item.id}
         title={item.title}
