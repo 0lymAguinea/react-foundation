@@ -52,7 +52,12 @@ function ItemList({ item, setCart, handleCartDelete }) {
           >
             -
           </Button>
-          <Button onClick={() => handleCartCounter(item, "+")}>+</Button>
+          <Button
+            onClick={() => handleCartCounter(item, "+")}
+            disabled={itemCounter === 50}
+          >
+            +
+          </Button>
         </p>
         <p className="">Price: ${item.price}</p>
         <p>Total: ${totalPrice}</p>

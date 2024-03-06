@@ -10,7 +10,9 @@ function useCounterInput(initialCount = 1, setCart) {
   };
 
   const handleCounterIncrement = () => {
-    setItemCounter(parseInt(itemCounter) + 1);
+    if (itemCounter < 50) {
+      setItemCounter(parseInt(itemCounter) + 1);
+    }
   };
 
   const handleCounterDecrement = () => {

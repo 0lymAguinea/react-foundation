@@ -62,7 +62,7 @@ function ItemsCards(props) {
           className="float-right mt-3"
           onClick={() => props.handleAddToCart(itemInfo)}
           disabled={
-            itemCounter === "" || itemCounter === "0" || itemCounter === "50"
+            itemCounter === "" || itemCounter === "0" || itemCounter > "50"
           }
         >
           Add to Cart
