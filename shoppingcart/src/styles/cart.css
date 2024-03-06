@@ -12,4 +12,5 @@
 .checkoutCard {
   top: 0;
   position: sticky;
+  height: fit-content;
 }
