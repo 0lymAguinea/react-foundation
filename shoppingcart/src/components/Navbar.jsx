@@ -4,9 +4,11 @@ import Navbar from "react-bootstrap/Navbar";
 import "../styles/navbar.css";
 import { Link } from "react-router-dom";
 import { IoMdCart } from "react-icons/io";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { ShopContext } from "../App";
 
-function Header(props) {
+function Header() {
+  const { cart } = useContext(ShopContext);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -35,7 +37,7 @@ function Header(props) {
             <Link to="cart" aria-label="Cart pag" className="ms-2">
               <IoMdCart className="fs-2 my-auto position-relative" alt="" />
               <span className="position-absolute  translate-middle badge border border-light rounded-circle bg-danger p-2">
-                {props.cart.length}
+                {cart.length}
               </span>
             </Link>
             <Navbar.Collapse id="basic-navbar-nav">
@@ -64,7 +66,7 @@ function Header(props) {
             <Link to="cart" aria-label="Cart pag" className="ms-1">
               <IoMdCart className="fs-2 my-auto position-relative" alt="" />
               <span className="position-absolute  translate-middle badge border border-light rounded-circle bg-danger p-2">
-                {props.cart.length}
+                {cart.length}
               </span>
             </Link>
           </>

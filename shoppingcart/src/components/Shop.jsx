@@ -1,12 +1,14 @@
 import { Container, Row, Col } from "react-bootstrap";
 import PropTypes, { oneOfType } from "prop-types";
 import ItemsCards from "./ItemCards";
-
+import { useContext } from "react";
 import SearchInput from "./Search";
 import ClipLoader from "react-spinners/ClipLoader";
 import useSearchItems from "../hooks/useSearchItems";
+import { ShopContext } from "../App";
 
-function ItemColsCard({ item, handleAddToCart }) {
+function ItemColsCard({ item }) {
+  const { handleAddToCart } = useContext(ShopContext);
   return (
     <Col md={6} lg={3} className="mb-4">
       <ItemsCards
@@ -24,7 +26,9 @@ function ItemColsCard({ item, handleAddToCart }) {
   );
 }
 
-function Shop({ initialItems, initialError, initialLoading, handleAddToCart }) {
+function Shop() {
+  const { initialItems, initialError, initialLoading } =
+    useContext(ShopContext);
   const { search, isSearch, handleSearchChange } = useSearchItems();
 
   const filteredItems = isSearch
@@ -65,20 +69,12 @@ function Shop({ initialItems, initialError, initialLoading, handleAddToCart }) {
                 <p className="fs-1 text-center">No items found</p>
               ) : (
                 filteredItems.map((item) => (
-                  <ItemColsCard
-                    item={item}
-                    handleAddToCart={handleAddToCart}
-                    key={item.id}
-                  />
+                  <ItemColsCard item={item} key={item.id} />
                 ))
               )
             ) : (
               initialItems.map((item) => (
-                <ItemColsCard
-                  item={item}
-                  handleAddToCart={handleAddToCart}
-                  key={item.id}
-                />
+                <ItemColsCard item={item} key={item.id} />
               ))
             )}
           </Row>

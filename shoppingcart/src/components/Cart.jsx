@@ -3,8 +3,11 @@ import "../styles/cart.css";
 import { MdDeleteForever } from "react-icons/md";
 import useCounterInput from "../hooks/useCounterInput";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { ShopContext } from "../App";
 
-function Checkout({ cart }) {
+function Checkout() {
+  const { cart } = useContext(ShopContext);
   const totalPrice = cart.reduce((accu, item) => {
     return accu + item.price * item.quantity;
   }, 0);
@@ -24,7 +27,8 @@ function Checkout({ cart }) {
   );
 }
 
-function ItemList({ item, setCart, handleCartDelete }) {
+function ItemList({ item }) {
+  const { setCart, handleCartDelete } = useContext(ShopContext);
   const { itemCounter, handleCartCounter } = useCounterInput(
     item.quantity,
     setCart
@@ -71,7 +75,8 @@ function ItemList({ item, setCart, handleCartDelete }) {
   );
 }
 
-function Cart({ cart, setCart, handleCartDelete }) {
+function Cart() {
+  const { cart, setCart, handleCartDelete } = useContext(ShopContext);
   if (cart.length === 0) {
     return (
       <div className="text-center my-5">
@@ -88,17 +93,12 @@ function Cart({ cart, setCart, handleCartDelete }) {
       <Row>
         <Col md={7}>
           {cart.map((item) => (
-            <ItemList
-              key={item.id}
-              item={item}
-              setCart={setCart}
-              handleCartDelete={handleCartDelete}
-            />
+            <ItemList key={item.id} item={item} />
           ))}
         </Col>
         <Col md={5}>
           <Card className="mt-4 checkoutCard">
-            <Checkout cart={cart} />
+            <Checkout />
           </Card>
         </Col>
       </Row>

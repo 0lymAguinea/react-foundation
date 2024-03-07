@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import { Route, Routes } from "react-router-dom";
+import { createContext } from "react";
 import useInitialProducts from "./hooks/useInitialProducts";
 import useCart from "./hooks/useCart";
 import Navbar from "./components/Navbar";
@@ -8,41 +9,42 @@ import Home from "./components/Home";
 import Shop from "./components/Shop";
 import Cart from "./components/Cart";
 import PropTypes, { oneOfType } from "prop-types";
+
+export const ShopContext = createContext({
+  initialItems: [],
+  initialLoading: null,
+  initialError: null,
+  cart: [],
+  setCart: () => {},
+  handleAddToCart: () => {},
+  handleCartDelete: () => {},
+});
 function App() {
   const { cart, setCart, handleAddToCart, handleCartDelete } = useCart();
 
   const { initialItems, initialError, initialLoading } = useInitialProducts();
 
   return (
-    <>
-      <Navbar cart={cart} />
+    <ShopContext.Provider
+      value={{
+        initialItems,
+        initialLoading,
+        initialError,
+        cart,
+        setCart,
+        handleAddToCart,
+        handleCartDelete,
+      }}
+    >
+      <Navbar />
       <Container fluid>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/shop"
-            element={
-              <Shop
-                initialItems={initialItems}
-                initialError={initialError}
-                initialLoading={initialLoading}
-                handleAddToCart={handleAddToCart}
-              />
-            }
-          />
-          <Route
-            path="/cart"
-            element={
-              <Cart
-                cart={cart}
-                setCart={setCart}
-                handleCartDelete={handleCartDelete}
-              />
-            }
-          />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </Container>
-    </>
+    </ShopContext.Provider>
   );
 }
 
