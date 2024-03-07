@@ -76,7 +76,7 @@ function ItemList({ item }) {
 }
 
 function Cart() {
-  const { cart, setCart, handleCartDelete } = useContext(ShopContext);
+  const { cart } = useContext(ShopContext);
   if (cart.length === 0) {
     return (
       <div className="text-center my-5">
