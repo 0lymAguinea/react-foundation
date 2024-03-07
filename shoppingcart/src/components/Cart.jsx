@@ -4,10 +4,10 @@ import { MdDeleteForever } from "react-icons/md";
 import useCounterInput from "../hooks/useCounterInput";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { ShopContext } from "../App";
+import { CartContext } from "../App";
 
 function Checkout() {
-  const { cart } = useContext(ShopContext);
+  const { cart } = useContext(CartContext);
   const totalPrice = cart.reduce((accu, item) => {
     return accu + item.price * item.quantity;
   }, 0);
@@ -28,7 +28,7 @@ function Checkout() {
 }
 
 function ItemList({ item }) {
-  const { setCart, handleCartDelete } = useContext(ShopContext);
+  const { setCart, handleCartDelete } = useContext(CartContext);
   const { itemCounter, handleCartCounter } = useCounterInput(
     item.quantity,
     setCart
@@ -76,7 +76,7 @@ function ItemList({ item }) {
 }
 
 function Cart() {
-  const { cart } = useContext(ShopContext);
+  const { cart } = useContext(CartContext);
   if (cart.length === 0) {
     return (
       <div className="text-center my-5">

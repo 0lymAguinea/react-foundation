@@ -5,10 +5,10 @@ import { useContext } from "react";
 import SearchInput from "./Search";
 import ClipLoader from "react-spinners/ClipLoader";
 import useSearchItems from "../hooks/useSearchItems";
-import { ShopContext } from "../App";
+import { ShopContext, CartContext } from "../App";
 
 function ItemColsCard({ item }) {
-  const { handleAddToCart } = useContext(ShopContext);
+  const { handleAddToCart } = useContext(CartContext);
   return (
     <Col md={6} lg={3} className="mb-4">
       <ItemsCards

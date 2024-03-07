@@ -5,10 +5,10 @@ import "../styles/navbar.css";
 import { Link } from "react-router-dom";
 import { IoMdCart } from "react-icons/io";
 import { useState, useEffect, useContext } from "react";
-import { ShopContext } from "../App";
+import { CartContext } from "../App";
 
 function Header() {
-  const { cart } = useContext(ShopContext);
+  const { cart } = useContext(CartContext);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {

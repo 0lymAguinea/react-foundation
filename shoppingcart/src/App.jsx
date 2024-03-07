@@ -14,6 +14,9 @@ export const ShopContext = createContext({
   initialItems: [],
   initialLoading: null,
   initialError: null,
+});
+
+export const CartContext = createContext({
   cart: [],
   setCart: () => {},
   handleAddToCart: () => {},
@@ -30,20 +33,20 @@ function App() {
         initialItems,
         initialLoading,
         initialError,
-        cart,
-        setCart,
-        handleAddToCart,
-        handleCartDelete,
       }}
     >
-      <Navbar />
-      <Container fluid>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/cart" element={<Cart />} />
-        </Routes>
-      </Container>
+      <CartContext.Provider
+        value={{ cart, setCart, handleAddToCart, handleCartDelete }}
+      >
+        <Navbar />
+        <Container fluid>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/cart" element={<Cart />} />
+          </Routes>
+        </Container>
+      </CartContext.Provider>
     </ShopContext.Provider>
   );
 }
