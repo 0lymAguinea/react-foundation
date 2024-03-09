@@ -1,9 +1,8 @@
-import { Card, Button, Row, InputGroup, Form } from "react-bootstrap";
-import PropTypes from "prop-types";
+import { Card, Button, InputGroup, Form } from "react-bootstrap";
+import PropTypes, { oneOfType } from "prop-types";
 import useCounterInput from "../hooks/useCounterInput";
 import "../styles/card.css";
 import { useContext } from "react";
-import { oneOfType } from "prop-types";
 import { CartContext } from "../App";
 function ItemsCards(props) {
   const { handleAddToCart } = useContext(CartContext);
