@@ -2,9 +2,11 @@ import { Card, Button, Row, InputGroup, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
 import useCounterInput from "../hooks/useCounterInput";
 import "../styles/card.css";
-
+import { useContext } from "react";
 import { oneOfType } from "prop-types";
+import { CartContext } from "../App";
 function ItemsCards(props) {
+  const { handleAddToCart } = useContext(CartContext);
   const {
     itemCounter,
     handleCounterInput,
@@ -60,7 +62,7 @@ function ItemsCards(props) {
         <Button
           type="button"
           className="float-right mt-3"
-          onClick={() => props.handleAddToCart(itemInfo)}
+          onClick={() => handleAddToCart(itemInfo)}
           disabled={
             itemCounter === "" || itemCounter === "0" || itemCounter > "50"
           }
