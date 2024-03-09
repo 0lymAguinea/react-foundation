@@ -5,6 +5,7 @@ import useCounterInput from "../hooks/useCounterInput";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../App";
+import PropTypes, { oneOfType } from "prop-types";
 
 function Checkout() {
   const { cart } = useContext(CartContext);
@@ -107,3 +108,13 @@ function Cart() {
 }
 
 export default Cart;
+
+ItemList.propTypes = {
+  item: PropTypes.shape({
+    quantity: PropTypes.number,
+    price: PropTypes.number,
+    image: PropTypes.string,
+    title: PropTypes.string,
+    id: oneOfType([PropTypes.string, PropTypes.number]),
+  }).isRequired,
+};
