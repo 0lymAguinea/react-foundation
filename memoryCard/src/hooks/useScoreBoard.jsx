@@ -5,7 +5,7 @@ function useScoreBoard() {
   const [highestScore, setHighestScore] = useState(0);
 
   const handleScoreIncrease = () => {
-    setScore(score + 1);
+    setScore((score) => score + 1);
   };
 
   const handleHighestScore = () => {
