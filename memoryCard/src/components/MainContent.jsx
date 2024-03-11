@@ -2,6 +2,8 @@ import { Col, Row, Card } from "react-bootstrap";
 import SyncLoader from "react-spinners/SyncLoader";
 import useClickedPokemons from "../hooks/useClickedPokemons";
 import usePokemons from "../hooks/usePokemons";
+import PropTypes from "prop-types";
+
 function MainContent({ handleScoreIncrease, handleScoreReset }) {
   const { pokemons, loading, error } = usePokemons([]);
 
@@ -57,7 +59,16 @@ function MainContent({ handleScoreIncrease, handleScoreReset }) {
           <Row className="mt-5">
             {pokemons.slice(6, 12).map((pokemon) => (
               <Col sm={2} key={pokemon.id}>
-                <Card onClick={handleClicking}>
+                <Card
+                  onClick={(e) =>
+                    handleClicking(
+                      e,
+                      pokemons,
+                      handleScoreIncrease,
+                      handleScoreReset
+                    )
+                  }
+                >
                   <Card.Img
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
                     className="mx-auto"
@@ -75,5 +86,10 @@ function MainContent({ handleScoreIncrease, handleScoreReset }) {
     </>
   );
 }
+
+MainContent.propTypes = {
+  handleScoreIncrease: PropTypes.func,
+  handleScoreReset: PropTypes.func,
+};
 
 export default MainContent;
