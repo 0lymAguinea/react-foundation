@@ -1,4 +1,5 @@
 import { Row, Col } from "react-bootstrap";
+import PropTypes from "prop-types";
 function Header({ score, highestScore }) {
   return (
     <header>
@@ -14,5 +15,10 @@ function Header({ score, highestScore }) {
     </header>
   );
 }
+
+Header.propTypes = {
+  score: PropTypes.number,
+  highestScore: PropTypes.number,
+};
 
 export default Header;

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 function ModalInfo(props) {
   return (
@@ -26,4 +27,9 @@ function HowToPlay() {
   };
   return <ModalInfo show={show} handleHide={handleHide}></ModalInfo>;
 }
+
+ModalInfo.propTypes = {
+  show: PropTypes.bool,
+  handleHide: PropTypes.func,
+};
 export default HowToPlay;
