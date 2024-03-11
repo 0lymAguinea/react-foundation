@@ -2,31 +2,13 @@ import { useEffect, useState } from "react";
 import { Col, Row, Card } from "react-bootstrap";
 import SyncLoader from "react-spinners/SyncLoader";
 import useScoreBoard from "../hooks/useScoreBoard";
+import useClickedPokemons from "../hooks/useClickedPokemons";
 function MainContent({ handleScoreIncrease, handleScoreReset }) {
   const [pokemons, setPokemons] = useState([]);
-  const [clickedPokemons, setClickedPokemons] = useState([]);
+
+  const { handleClicking } = useClickedPokemons([]);
+
   const [loading, setLoading] = useState(true);
-
-  const shuffle = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      let temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-    }
-  };
-
-  const handleClicking = (e) => {
-    if (clickedPokemons.includes(e.target.alt)) {
-      setClickedPokemons([]);
-      handleScoreReset();
-      shuffle(pokemons);
-    } else {
-      setClickedPokemons([...clickedPokemons, e.target.alt]);
-      handleScoreIncrease();
-      shuffle(pokemons);
-    }
-  };
 
   useEffect(() => {
     async function getPokemon() {
@@ -74,7 +56,16 @@ function MainContent({ handleScoreIncrease, handleScoreReset }) {
           <Row className="mt-5">
             {pokemons.slice(0, 6).map((pokemon) => (
               <Col sm={2} key={pokemon.id}>
-                <Card onClick={handleClicking}>
+                <Card
+                  onClick={(e) =>
+                    handleClicking(
+                      e,
+                      pokemons,
+                      handleScoreIncrease,
+                      handleScoreReset
+                    )
+                  }
+                >
                   <Card.Img
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
                     className="mx-auto"
