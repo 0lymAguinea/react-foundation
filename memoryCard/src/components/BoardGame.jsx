@@ -1,9 +1,4 @@
-import { useEffect, useState } from "react";
-import { Col, Row, Card } from "react-bootstrap";
-import SyncLoader from "react-spinners/SyncLoader";
 import useScoreBoard from "../hooks/useScoreBoard";
-import useClickedPokemons from "../hooks/useClickedPokemons";
-import usePokemons from "../hooks/usePokemons";
 import MainContent from "./MainContent";
 import Header from "./Header";
 
