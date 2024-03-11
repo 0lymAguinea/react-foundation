@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Col, Row, Card } from "react-bootstrap";
 import SyncLoader from "react-spinners/SyncLoader";
-
+import useScoreBoard from "../hooks/useScoreBoard";
 function MainContent({ handleScoreIncrease, handleScoreReset }) {
   const [pokemons, setPokemons] = useState([]);
   const [clickedPokemons, setClickedPokemons] = useState([]);
@@ -126,23 +126,8 @@ function Header({ score, highestScore }) {
 }
 
 function BoardGame() {
-  const [score, setScore] = useState(0);
-  const [highestScore, setHighestScore] = useState(0);
-
-  const handleScoreIncrease = () => {
-    setScore(score + 1);
-  };
-
-  const handleHighestScore = () => {
-    setHighestScore(score);
-  };
-
-  const handleScoreReset = () => {
-    if (highestScore < score) {
-      handleHighestScore();
-    }
-    setScore(0);
-  };
+  const { score, highestScore, handleScoreIncrease, handleScoreReset } =
+    useScoreBoard(0);
 
   return (
     <>
