@@ -3,6 +3,9 @@ import App from "../App";
 import ErrorPage from "./ErrorPage";
 import Shop from "../components/Shop";
 import Cart from "../components/Cart";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -17,7 +20,11 @@ const Router = () => {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  );
 };
 
 export default Router;

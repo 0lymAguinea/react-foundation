@@ -9,7 +9,7 @@ import Home from "./components/Home";
 import Shop from "./components/Shop";
 import Cart from "./components/Cart";
 import PropTypes, { oneOfType } from "prop-types";
-
+import { useQuery } from "@tanstack/react-query";
 export const ShopContext = createContext({
   initialItems: [],
   initialLoading: null,
@@ -25,7 +25,11 @@ export const CartContext = createContext({
 function App() {
   const { cart, setCart, handleAddToCart, handleCartDelete } = useCart();
 
-  const { initialItems, initialError, initialLoading } = useInitialProducts();
+  const {
+    data: initialItems,
+    isLoading: initialLoading,
+    isError: initialError,
+  } = useQuery({ queryKey: ["items"], queryFn: useInitialProducts });
 
   return (
     <ShopContext.Provider
