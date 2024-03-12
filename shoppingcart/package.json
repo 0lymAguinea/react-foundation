@@ -11,6 +11,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.26.3",
+    "@tanstack/react-query-devtools": "^5.27.0",
     "bootstrap": "^5.3.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -21,6 +23,7 @@
     "react-spinners": "^0.13.8"
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.20.1",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "@testing-library/user-event": "^14.5.2",
