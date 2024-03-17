@@ -1,33 +1,28 @@
-import { useState, useEffect } from "react";
+import { useQueries } from "@tanstack/react-query";
 import useRandomPokemonsId from "./useRandomPokemonsId";
+import fetchPokemons from "../data/fetchPokemons";
+import { useState, useEffect } from "react";
 function usePokemons() {
   const [pokemons, setPokemons] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const { randomNumbers } = useRandomPokemonsId();
+  const pokemonQueries = useQueries({
+    queries: randomNumbers.map((number) => ({
+      queryKey: ["pokemons", number],
+      queryFn: () => fetchPokemons(number),
+      staleTime: Infinity,
+    })),
+  });
+
+  const loading = pokemonQueries.some((query) => query.isLoading);
+  const error = pokemonQueries.some((query) => query.isError);
+  const pokemonData = pokemonQueries.map((query) => query.data);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const pokemonData = await Promise.all(
-          randomNumbers.map(async (number) => {
-            const response = await fetch(
-              `https://pokeapi.co/api/v2/pokemon/${number}`,
-              { method: "GET" }
-            );
-            return response.json();
-          })
-        );
-        setPokemons(pokemonData);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+    if (!loading) {
+      setPokemons(pokemonData);
+    }
+  }, [loading]);
 
   return { pokemons, loading, error };
 }
